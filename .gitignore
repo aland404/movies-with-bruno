@@ -1,0 +1,6 @@
+# IDE Specifics
+.idea
+.DS_Store
+
+# TS
+node_modules
