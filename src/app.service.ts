@@ -5,10 +5,6 @@ import {movies} from "./movies";
 
 @Injectable()
 export class AppService {
-    getHello(): string {
-        return 'Hello World!';
-    }
-
     getMovies(): Movie[] {
         return movies
     }
