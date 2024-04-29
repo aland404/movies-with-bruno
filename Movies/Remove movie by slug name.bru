@@ -1,0 +1,11 @@
+meta {
+  name: Remove movie by slug name
+  type: http
+  seq: 3
+}
+
+delete {
+  url: http://localhost:3000/movies/a-nightmare-on-elm-street
+  body: none
+  auth: none
+}
