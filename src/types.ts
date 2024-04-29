@@ -1,4 +1,5 @@
 export type Movie = {
+    slug: string,
     title: string,
     year: string,
     released: string,

@@ -2,6 +2,7 @@ import {Movie} from "./types";
 
 export const movies: Movie[] = [
     {
+        slug: 'the-shining',
         title: "The Shining",
         year: "1980",
         released: "13 Jun 1980",
@@ -19,6 +20,7 @@ export const movies: Movie[] = [
         boxOffice: "$45,634,352",
     },
     {
+        slug: 'sinister',
         title: "Sinister",
         year: "2012",
         released: "12 Oct 2012",
@@ -36,6 +38,7 @@ export const movies: Movie[] = [
         boxOffice: "$48,086,903",
     },
     {
+        slug: 'a-nightmare-on-elm-street',
         title: "A Nightmare on Elm Street",
         year: "1984",
         released: "16 Nov 1984",
