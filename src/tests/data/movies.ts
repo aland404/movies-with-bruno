@@ -38,8 +38,28 @@ const sinister: Movie = {
     boxOffice: "$48,086,903",
 }
 
+const unexistingMovie: Movie = {
+    slug: 'unexisting-movie',
+    title: "None",
+    year: "None",
+    released: "1None",
+    runtime: "None",
+    genre: "None",
+    director: "None",
+    writer: "None",
+    actors: "None",
+    plot: "None",
+    awards: "None",
+    poster: "None",
+    imdbRating: "None",
+    imdbVotes: "None",
+    type: "None",
+    boxOffice: "None",
+}
+
 export const moviesForTest = {
     theShining,
     sinister,
+    unexistingMovie,
     twoRandomMovies: [theShining, sinister]
 }

@@ -18,4 +18,16 @@ export class AppService {
         movies.splice(movieIndex, 1)
         return `Movie with slug ${movieSlug} has been deleted`
     }
+
+    getAMovieBySlug(slug: string): Movie | undefined {
+        return movies.find(movie => movie.slug === slug);
+    }
+
+    updateAMovie(movieSlug: string, movieToUpdate: Omit<Partial<Movie>, 'slug'>): Movie {
+        const movieToUpdateIndex = movies.findIndex(movie => movie.slug === movieSlug)
+
+        movies[movieToUpdateIndex] = { ...movies[movieToUpdateIndex], ...movieToUpdate }
+
+        return movies[movieToUpdateIndex]
+    }
 }
