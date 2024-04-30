@@ -1,30 +1,33 @@
-import {Controller, Delete, Get, Param, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Put} from '@nestjs/common';
 import {AppService} from './app.service';
 import {Movie} from "./types";
+import {ApiTags} from "@nestjs/swagger";
+import {UpdateMovieDto} from "./UpdateMovieDto";
 
-@Controller()
+@ApiTags('movies')
+@Controller('movies')
 export class AppController {
     constructor(private readonly appService: AppService) {
     }
 
-    @Get('/movies')
+    @Get('/')
     getMovies(): Movie[] {
         return this.appService.getMovies()
     }
 
-    @Delete('/movies/:movieSlug')
+    @Delete('/:movieSlug')
     deleteMovieBySlug(@Param('movieSlug') movieSlug: string): string {
         return this.appService.deleteMovieBySug(movieSlug)
     }
 
-    @Get('/movies/:movieSlug')
+    @Get('/:movieSlug')
     getAMovieBySlug(@Param('movieSlug') movieSlug: string): Movie | undefined {
         return this.appService.getAMovieBySlug(movieSlug)
     }
 
 
-    @Put('/movies/:movieSlug')
-    updateAMovie(@Param('movieSlug') movieSlug: string, movieToUpdate: Omit<Partial<Movie>, 'slug'>) {
+    @Put('/:movieSlug')
+    updateAMovie(@Param('movieSlug') movieSlug: string, @Body() movieToUpdate: UpdateMovieDto) {
         return this.appService.updateAMovie(movieSlug, movieToUpdate);
     }
 }
