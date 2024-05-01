@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {moviesForTest} from "./tests/data/movies";
 import {Movie} from "./types";
+import {UpdateMovieDto} from "./UpdateMovieDto";
 
 const MockedMovies = jest.requireMock('./movies');
 
@@ -107,7 +108,8 @@ describe('UNIT - AppController', () => {
     it('should update partially the movie info', () => {
       MockedMovies.movies = [...moviesForTest.twoRandomMovies]
       const movieToUpdate = moviesForTest.twoRandomMovies[1]
-      const infoToUpdate: Omit<Partial<Movie>, 'slug'> = {
+      const infoToUpdate: UpdateMovieDto = {
+        slug: movieToUpdate.slug,
         director: "My new director",
         genre: "My new genre",
         imdbVotes: "My new imdbVotes",
