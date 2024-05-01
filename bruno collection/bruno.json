@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "Movies collection",
+  "name": "Movies",
   "type": "collection",
   "ignore": [
     "node_modules",

@@ -1,0 +1,18 @@
+meta {
+  name: Update a movie
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/movies/a-nightmare-on-elm-street
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "slug": "a-nightmare-on-elm-street",
+    "title": "My new title"
+  }
+}
