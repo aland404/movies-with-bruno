@@ -1,8 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import {Test, TestingModule} from '@nestjs/testing';
+import {AppController} from './app.controller';
+import {AppService} from './app.service';
 import {moviesForTest} from "./tests/data/movies";
-import {Movie} from "./types";
 import {UpdateMovieDto} from "./UpdateMovieDto";
 
 const MockedMovies = jest.requireMock('./movies');
