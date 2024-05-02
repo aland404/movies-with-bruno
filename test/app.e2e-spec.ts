@@ -2,12 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import {INestApplication, ValidationPipe} from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import {moviesForTest} from "../src/tests/data/movies";
-import {UpdateMovieDto} from "../src/UpdateMovieDto";
+import { moviesForTest } from "../src/movie/tests/data/movies";
+import { UpdateMovieDto } from "../src/movie/infrastructure/movie.dto";
 
-const MockedMovies = jest.requireMock('../src/movies');
+const MockedMovies = jest.requireMock('../src/movie/infrastructure/movies');
 
-jest.mock('../src/movies', () => ({
+jest.mock('../src/movie/infrastructure/movies', () => ({
   movies: []
 }))
 

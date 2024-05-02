@@ -1,15 +1,17 @@
 import {Injectable} from '@nestjs/common';
-import {Movie} from "./types";
 import {movies} from "./movies";
+import {MovieRepository} from "../domain/movieRepository.interface";
+import {UpdateMovieDto} from "./movie.dto";
+import {Movie} from "../domain/movie";
 
 
 @Injectable()
-export class AppService {
+export class InMemoryMovieRepository implements MovieRepository {
     getMovies(): Movie[] {
         return movies
     }
 
-    deleteMovieBySug(movieSlug: string) {
+    deleteMovieBySug(movieSlug: string): string {
         const movieIndex = movies.findIndex(movie => {
             return movie.slug === movieSlug
         })
@@ -23,7 +25,7 @@ export class AppService {
         return movies.find(movie => movie.slug === slug);
     }
 
-    updateAMovie(movieSlug: string, movieToUpdate: Omit<Partial<Movie>, 'slug'>): Movie {
+    updateAMovie(movieSlug: string, movieToUpdate: UpdateMovieDto): Movie {
         const movieToUpdateIndex = movies.findIndex(movie => movie.slug === movieSlug)
 
         movies[movieToUpdateIndex] = { ...movies[movieToUpdateIndex], ...movieToUpdate }

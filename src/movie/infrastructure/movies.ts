@@ -1,4 +1,4 @@
-import {Movie} from "./types";
+import {Movie} from "../domain/movie";
 
 export const movies: Movie[] = [
     {

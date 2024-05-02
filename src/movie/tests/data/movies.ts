@@ -1,4 +1,4 @@
-import { Movie } from "../../types";
+import { Movie } from "../../domain/movie";
 
 const theShining: Movie = {
     slug: 'the-shining',

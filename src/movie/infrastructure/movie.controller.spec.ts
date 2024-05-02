@@ -1,8 +1,9 @@
 import {Test, TestingModule} from '@nestjs/testing';
-import {AppController} from './app.controller';
-import {AppService} from './app.service';
-import {moviesForTest} from "./tests/data/movies";
-import {UpdateMovieDto} from "./UpdateMovieDto";
+import {moviesForTest} from "../tests/data/movies";
+import {MovieController} from "./movie.controller";
+import {UpdateMovieDto} from "./movie.dto";
+import {InMemoryMovieRepository} from "./movie.repository";
+import {MovieRepository} from "../domain/movieRepository.interface";
 
 const MockedMovies = jest.requireMock('./movies');
 
@@ -11,17 +12,17 @@ jest.mock('./movies', () => ({
 }))
 
 describe('UNIT - AppController', () => {
-  let appController: AppController;
+  let appController: MovieController;
 
   beforeEach(async () => {
     jest.resetModules()
 
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService],
+      controllers: [MovieController],
+      providers: [{provide: MovieRepository, useClass: InMemoryMovieRepository}],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appController = app.get<MovieController>(MovieController);
   });
 
   describe('getMovies', () => {
