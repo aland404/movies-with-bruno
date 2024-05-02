@@ -5,3 +5,6 @@
 # TS
 node_modules
 dist
+
+# yarn
+yarn-error.log
