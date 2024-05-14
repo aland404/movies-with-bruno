@@ -1,11 +1,19 @@
 meta {
   name: Get movies
   type: http
-  seq: 3
+  seq: 1
 }
 
 get {
   url: http://localhost:3000/movies
   body: none
   auth: none
+}
+
+script:pre-request {
+  console.log("Request: ", req)
+}
+
+script:post-response {
+  console.log("Response:", res[0])
 }

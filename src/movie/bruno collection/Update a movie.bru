@@ -1,7 +1,7 @@
 meta {
   name: Update a movie
   type: http
-  seq: 4
+  seq: 2
 }
 
 put {
@@ -15,4 +15,9 @@ body:json {
     "slug": "a-nightmare-on-elm-street",
     "title": "My new title"
   }
+}
+
+body:form-urlencoded {
+  slug: {{slug}}
+  title: {{title}}
 }

@@ -1,0 +1,29 @@
+meta {
+  name: Update a movie with generated data
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/movies/a-nightmare-on-elm-street
+  body: none
+  auth: none
+}
+
+script:pre-request {
+  const { randMovie } = require('@ngneat/falso');
+  
+  const randomTitle = randMovie();
+  
+  req.setBody({
+    title: randomTitle,
+    slug: transformToHyphenSeparated(randomTitle)
+  });
+  
+  function transformToHyphenSeparated(sentence) {
+      const lowerCaseSentence = sentence.toLowerCase();
+      const hyphenSeparated = lowerCaseSentence.replace(/\s+/g, '-');
+  
+      return hyphenSeparated;
+  }
+}

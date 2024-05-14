@@ -1,0 +1,24 @@
+meta {
+  name: Update a movie with vars
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/movies/a-nightmare-on-elm-street
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  slug: {{slug}}
+  title: {{title}}
+}
+
+vars:pre-request {
+  slug: a-nightmare-on-elm-street
+}
+
+script:pre-request {
+  bru.setVar("title", "My new title");
+}
