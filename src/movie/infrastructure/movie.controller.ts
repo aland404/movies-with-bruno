@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Inject, Param, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpException, HttpStatus, Inject, Param, Put} from '@nestjs/common';
 import {ApiTags} from "@nestjs/swagger";
 import {UpdateMovieDto} from "./movie.dto";
 import {MovieRepository} from "../domain/movieRepository.interface";
@@ -28,6 +28,8 @@ export class MovieController {
 
     @Put('/:movieSlug')
     updateAMovie(@Param('movieSlug') movieSlug: string, @Body() movieToUpdate: UpdateMovieDto) {
+        if (movieSlug !== movieToUpdate.slug) throw new HttpException('Slug in url and slug in body are different', HttpStatus.BAD_REQUEST)
+
         return this.movieRepository.updateAMovie(movieSlug, movieToUpdate);
     }
 }

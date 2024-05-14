@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {movies} from "./movies";
 import {MovieRepository} from "../domain/movieRepository.interface";
 import {UpdateMovieDto} from "./movie.dto";
@@ -27,8 +27,9 @@ export class InMemoryMovieRepository implements MovieRepository {
 
     updateAMovie(movieSlug: string, movieToUpdate: UpdateMovieDto): Movie {
         const movieToUpdateIndex = movies.findIndex(movie => movie.slug === movieSlug)
+        if (movieToUpdateIndex < 0) throw new HttpException('No corresponding movie found', HttpStatus.NOT_FOUND)
 
-        movies[movieToUpdateIndex] = { ...movies[movieToUpdateIndex], ...movieToUpdate }
+        movies[movieToUpdateIndex] = { ...movies[movieToUpdateIndex], ...movieToUpdate, slug: movieSlug }
 
         return movies[movieToUpdateIndex]
     }
