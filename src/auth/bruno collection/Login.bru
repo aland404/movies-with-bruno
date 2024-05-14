@@ -1,18 +1,30 @@
 meta {
   name: Login
   type: http
-  seq: 2
+  seq: 1
 }
 
 post {
-  url: http://localhost:3000/auth/login
+  url: {{base_url}}/auth/login
   body: json
   auth: none
 }
 
 body:json {
   {
-    "username": "aland404",
-    "password": "1secretP@ssword"
+    "username": "{{username}}",
+    "password": "{{password}}"
   }
+}
+
+vars:post-response {
+  access_token: res.body.access_token
+}
+
+script:pre-request {
+  console.log('Request:', req);
+}
+
+script:post-response {
+  console.log('Token:', res.body.access_token);
 }
