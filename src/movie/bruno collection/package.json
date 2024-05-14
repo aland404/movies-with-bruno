@@ -1,0 +1,17 @@
+{
+  "name": "movie-bruno-api-collection",
+  "version": "1.0.0",
+  "dependencies": {
+    "@ngneat/falso": "^7.2.0"
+  },
+
+  "devDependencies": {
+    "@usebruno/cli": "^1.16.0"
+  },
+  "scripts": {
+    "run": "bru run .",
+    "run:local": "bru run . --env localhost",
+    "run:collect": "bru run . --env localhost --output results.json"
+  },
+  "license": "MIT"
+}
