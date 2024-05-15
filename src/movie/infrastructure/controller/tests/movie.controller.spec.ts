@@ -1,14 +1,14 @@
 import { HttpException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { MovieRepository } from "../domain/movieRepository.interface";
-import { moviesForTest } from "../tests/data/movies";
-import { CreateMovieDto, UpdateMovieDto } from "./dtos";
-import { MovieController } from "./movie.controller";
-import { InMemoryMovieRepository } from "./movie.repository";
+import { MovieRepository } from "../../../domain/movieRepository.interface";
+import { moviesForTest } from "../../../tests/data/movies";
+import { CreateMovieDto, UpdateMovieDto } from "../../dtos";
+import { InMemoryMovieRepository } from "../../movie.repository";
+import { MovieController } from "../movie.controller";
 
-const MockedMovies = jest.requireMock('./movies');
+const MockedMovies = jest.requireMock('../../movies');
 
-jest.mock('./movies', () => ({
+jest.mock('../../movies', () => ({
   movies: []
 }))
 
