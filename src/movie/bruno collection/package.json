@@ -11,7 +11,7 @@
   "scripts": {
     "run": "bru run .",
     "run:local": "bru run . --env localhost",
-    "run:collect": "bru run . --env localhost --output run-collect/results.json"
+    "run:collect": "bru run . --env localhost --output run-collect-results.json"
   },
   "license": "MIT"
 }
