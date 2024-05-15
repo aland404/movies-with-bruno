@@ -12,7 +12,7 @@ export class InMemoryMovieRepository implements MovieRepository {
         return movies
     }
 
-    deleteMovieBySug(movieSlug: string): string {
+    deleteAMovieBySug(movieSlug: string): string {
         const movieIndex = movies.findIndex(movie => {
             return movie.slug === movieSlug
         })

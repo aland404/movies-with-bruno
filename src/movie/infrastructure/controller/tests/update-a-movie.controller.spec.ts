@@ -2,7 +2,7 @@ import { HttpException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { MovieRepository } from "../../../domain/movieRepository.interface";
 import { moviesForTest } from "../../../tests/data/movies";
-import { CreateMovieDto, UpdateMovieDto } from "../../dtos";
+import { UpdateMovieDto } from "../../dtos";
 import { InMemoryMovieRepository } from "../../movie.repository";
 import { MovieController } from "../movie.controller";
 
@@ -12,7 +12,7 @@ jest.mock('../../movies', () => ({
   movies: []
 }))
 
-describe('UNIT - AppController', () => {
+describe('UNIT - AppController - updateAMovie', () => {
   let appController: MovieController;
 
   beforeEach(async () => {
@@ -24,57 +24,6 @@ describe('UNIT - AppController', () => {
     }).compile();
 
     appController = app.get<MovieController>(MovieController);
-  });
-
-  describe('getMovies', () => {
-    it('should return 2 movies', () => {
-      MockedMovies.movies = [...moviesForTest.twoRandomMovies]
-
-      const foundMovies = appController.getMovies()
-
-      expect(foundMovies.length).toBe(2);
-    });
-  });
-
-  describe('deleteMovieBySlug', () => {
-    it('should delete the first movie', () => {
-      MockedMovies.movies = [...moviesForTest.twoRandomMovies]
-      const movieToDelete = moviesForTest.twoRandomMovies[0]
-
-      const deletedInfo = appController.deleteMovieBySlug(movieToDelete.slug)
-
-      expect(deletedInfo).toBe(`Movie with slug ${movieToDelete.slug} has been deleted`);
-    });
-
-    it('should delete the second movie', () => {
-      MockedMovies.movies = [...moviesForTest.twoRandomMovies]
-      const movieToDelete = moviesForTest.twoRandomMovies[1]
-
-      const deletedInfo = appController.deleteMovieBySlug(movieToDelete.slug)
-
-      expect(deletedInfo).toBe(`Movie with slug ${movieToDelete.slug} has been deleted`);
-    });
-  });
-
-  describe('getAMovieBySlug', () => {
-    it('should find the corresponding movie', () => {
-      MockedMovies.movies = [...moviesForTest.twoRandomMovies]
-      const movieToFind = moviesForTest.twoRandomMovies[1]
-
-      const foundMovie = appController.getAMovieBySlug(movieToFind.slug)
-
-      expect(foundMovie).toBe(movieToFind);
-    });
-
-
-    it('should not find the corresponding movie', () => {
-      MockedMovies.movies = [...moviesForTest.twoRandomMovies]
-      const movieToFind = moviesForTest.unexistingMovie
-
-      const foundMovie = appController.getAMovieBySlug(movieToFind.slug)
-
-      expect(foundMovie).toBe(undefined);
-    });
   });
 
   describe('updateAMovie', () => {
@@ -180,63 +129,5 @@ describe('UNIT - AppController', () => {
         expect(error).toBeInstanceOf(HttpException)
       }
     });
-  });
-
-
-  describe('createAMovie', () => {
-    it('should create a movie with default values', () => {
-      MockedMovies.movies = [...moviesForTest.twoRandomMovies]
-      const movieToCreate: CreateMovieDto = {
-        slug: "A different slug",
-        actors: "My actors",
-        boxOffice: "My boxOffice",
-        director: "My director",
-        genre: "My genre",
-        plot: "My plot",
-        runtime: "My runtime",
-        title: "My title",
-        type: "My type",
-        writer: "My writer",
-        year: "My actors"
-      }
-
-      const createdMovie = appController.createAMovie(movieToCreate)
-
-      expect(createdMovie).toStrictEqual({
-        ...movieToCreate,
-        awards: '',
-        imdbRating: '',
-        imdbVotes: '',
-        poster: '',
-        released: ''
-      });
-    });
-
-
-    it('should create a movie with all values', () => {
-      MockedMovies.movies = [...moviesForTest.twoRandomMovies]
-      const movieToCreate: CreateMovieDto = {
-        slug: "A different slug",
-        actors: "My actors",
-        boxOffice: "My boxOffice",
-        director: "My director",
-        genre: "My genre",
-        plot: "My plot",
-        runtime: "My runtime",
-        title: "My title",
-        type: "My type",
-        writer: "My writer",
-        year: "My actors",
-        awards: "My awards",
-        imdbRating: "My imdbRating",
-        imdbVotes: "My imdbVotes",
-        poster: "My poster",
-        released: "My released"
-      }
-
-      const createdMovie = appController.createAMovie(movieToCreate)
-
-      expect(createdMovie).toStrictEqual(movieToCreate);
-    })
   });
 });

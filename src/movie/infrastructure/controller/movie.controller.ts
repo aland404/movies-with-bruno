@@ -17,7 +17,7 @@ export class MovieController {
 
     @Delete('/:movieSlug')
     deleteMovieBySlug(@Param('movieSlug') movieSlug: string): string {
-        return this.movieRepository.deleteMovieBySug(movieSlug)
+        return this.movieRepository.deleteAMovieBySug(movieSlug)
     }
 
     @Get('/:movieSlug')
