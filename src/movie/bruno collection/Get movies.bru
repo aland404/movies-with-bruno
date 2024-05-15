@@ -11,9 +11,20 @@ get {
 }
 
 script:pre-request {
-  console.log("Request: ", req)
+  console.log("Request: ", req.getUrl())
 }
 
 script:post-response {
-  console.log("Response:", res[0])
+  console.log("Response:", res.getBody())
+}
+
+tests {
+  test("should be able to get movies", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("should receive a list of movies", function() {
+    const data = res.getBody();
+    expect(data).to.be.a('array');
+  });
 }
