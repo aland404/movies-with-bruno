@@ -93,7 +93,7 @@ describe('UNIT - AppController - updateAMovie', () => {
       }
 
       try {
-        await expect(appController.updateAMovie(movieToUpdate.slug, infoToUpdate))
+        await appController.updateAMovie(movieToUpdate.slug, infoToUpdate)
         expect(true).toBe(false)
       } catch(error) {
         expect(error).toBeInstanceOf(HttpException)
@@ -123,7 +123,7 @@ describe('UNIT - AppController - updateAMovie', () => {
       }
 
       try {
-        await expect(appController.updateAMovie(movieToUpdate.slug, infoToUpdate))
+        await appController.updateAMovie(movieToUpdate.slug, infoToUpdate)
         expect(true).toBe(false)
       } catch(error) {
         expect(error).toBeInstanceOf(HttpException)

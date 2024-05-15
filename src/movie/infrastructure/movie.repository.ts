@@ -27,6 +27,8 @@ export class InMemoryMovieRepository implements MovieRepository {
     }
 
     updateAMovie(movieSlug: string, movieToUpdate: UpdateMovieDto): Movie {
+        if (movieSlug !== movieToUpdate.slug) throw new HttpException('Slug in url and slug in body are different', HttpStatus.BAD_REQUEST)
+
         const movieToUpdateIndex = movies.findIndex(movie => movie.slug === movieSlug)
         if (movieToUpdateIndex < 0) throw new HttpException('No corresponding movie found', HttpStatus.NOT_FOUND)
 

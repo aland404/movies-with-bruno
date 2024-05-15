@@ -34,8 +34,6 @@ export class MovieController {
 
     @Put('/:movieSlug')
     updateAMovie(@Param('movieSlug') movieSlug: string, @Body() movieToUpdate: UpdateMovieDto): Movie {
-        if (movieSlug !== movieToUpdate.slug) throw new HttpException('Slug in url and slug in body are different', HttpStatus.BAD_REQUEST)
-
         return this.movieRepository.updateAMovie(movieSlug, movieToUpdate);
     }
 }
