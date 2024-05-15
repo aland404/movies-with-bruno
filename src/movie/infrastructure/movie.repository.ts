@@ -35,6 +35,9 @@ export class InMemoryMovieRepository implements MovieRepository {
         return movies[movieToUpdateIndex]
     }
     createAMovie(movieToCreate: CreateMovieDto): Movie {
+        const movieToUpdateIndex = movies.findIndex(movie => movie.slug === movieToCreate.slug)
+        if (movieToUpdateIndex >= 0) throw new HttpException('Slug already existing', HttpStatus.CONFLICT)
+
         const movieToAdd: Movie = createMovieDtoToMovie(movieToCreate)
         movies.push(movieToAdd)
 

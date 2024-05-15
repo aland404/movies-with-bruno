@@ -4,6 +4,7 @@ import { moviesForTest } from "../../../tests/data/movies";
 import { CreateMovieDto } from "../../dtos";
 import { InMemoryMovieRepository } from "../../movie.repository";
 import { MovieController } from "../movie.controller";
+import { HttpException } from '@nestjs/common';
 
 const MockedMovies = jest.requireMock('../../movies');
 
@@ -54,7 +55,6 @@ describe('UNIT - AppController - createAMovie', () => {
       });
     });
 
-
     it('should create a movie with all values', () => {
       MockedMovies.movies = [...moviesForTest.twoRandomMovies]
       const movieToCreate: CreateMovieDto = {
@@ -80,5 +80,28 @@ describe('UNIT - AppController - createAMovie', () => {
 
       expect(createdMovie).toStrictEqual(movieToCreate);
     })
+    it('should crash with slug already existing error', async () => {
+      MockedMovies.movies = [...moviesForTest.twoRandomMovies]
+      const movieToCreate: CreateMovieDto = {
+        slug: moviesForTest.twoRandomMovies[0].slug,
+        actors: "My actors",
+        boxOffice: "My boxOffice",
+        director: "My director",
+        genre: "My genre",
+        plot: "My plot",
+        runtime: "My runtime",
+        title: "My title",
+        type: "My type",
+        writer: "My writer",
+        year: "My actors"
+      }
+
+      try {
+        await appController.createAMovie(movieToCreate)
+        expect(true).toBe(false)
+      } catch(error) {
+        expect(error).toBeInstanceOf(HttpException)
+      }
+    });
   });
 });
