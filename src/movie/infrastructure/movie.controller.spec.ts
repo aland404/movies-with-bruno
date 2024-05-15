@@ -1,7 +1,7 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {moviesForTest} from "../tests/data/movies";
 import {MovieController} from "./movie.controller";
-import {UpdateMovieDto} from "./movie.dto";
+import {UpdateMovieDto} from "./dtos";
 import {InMemoryMovieRepository} from "./movie.repository";
 import {MovieRepository} from "../domain/movieRepository.interface";
 

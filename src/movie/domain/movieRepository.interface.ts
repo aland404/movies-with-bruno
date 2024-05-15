@@ -1,4 +1,4 @@
-import {UpdateMovieDto} from "../infrastructure/movie.dto";
+import {UpdateMovieDto} from "../infrastructure/dtos";
 import {Movie} from "./movie";
 
 export interface MovieRepository {

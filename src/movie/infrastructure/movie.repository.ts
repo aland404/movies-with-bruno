@@ -1,7 +1,7 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {movies} from "./movies";
 import {MovieRepository} from "../domain/movieRepository.interface";
-import {UpdateMovieDto} from "./movie.dto";
+import {UpdateMovieDto} from "./dtos";
 import {Movie} from "../domain/movie";
 
 

@@ -1,6 +1,6 @@
 import {Body, Controller, Delete, Get, HttpException, HttpStatus, Inject, Param, Put} from '@nestjs/common';
 import {ApiTags} from "@nestjs/swagger";
-import {UpdateMovieDto} from "./movie.dto";
+import {UpdateMovieDto} from "./dtos";
 import {MovieRepository} from "../domain/movieRepository.interface";
 import {Movie} from "../domain/movie";
 

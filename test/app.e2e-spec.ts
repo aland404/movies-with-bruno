@@ -3,7 +3,7 @@ import {INestApplication, ValidationPipe} from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { moviesForTest } from "../src/movie/tests/data/movies";
-import { UpdateMovieDto } from "../src/movie/infrastructure/movie.dto";
+import { UpdateMovieDto } from "../src/movie/infrastructure/dtos";
 
 const MockedMovies = jest.requireMock('../src/movie/infrastructure/movies');
 
