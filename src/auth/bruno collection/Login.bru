@@ -27,4 +27,6 @@ script:pre-request {
 
 script:post-response {
   console.log('Token:', res.body.access_token);
+  
+  // bru.setVar("access_token", res.body.access_token);
 }
