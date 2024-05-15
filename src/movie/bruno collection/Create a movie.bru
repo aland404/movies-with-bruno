@@ -1,0 +1,37 @@
+meta {
+  name: Create a movie
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/movies
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "slug": "A different slug",
+    "actors": "My actors",
+    "boxOffice": "My boxOffice",
+    "director": "My director",
+    "genre": "My genre",
+    "plot": "My plot",
+    "runtime": "My runtime",
+    "title": "My title",
+    "type": "My type",
+    "writer": "My writer",
+    "year": "My actors",
+    "awards": "My awards",
+    "imdbRating": "My imdbRating",
+    "imdbVotes": "My imdbVotes",
+    "poster": "My poster",
+    "released": "My released"
+  }
+}
+
+body:form-urlencoded {
+  slug: {{slug}}
+  title: {{title}}
+}
