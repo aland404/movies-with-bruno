@@ -1,8 +1,9 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
-import {movies} from "./movies";
-import {MovieRepository} from "../domain/movieRepository.interface";
-import {UpdateMovieDto} from "./dtos";
-import {Movie} from "../domain/movie";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Movie } from "../domain/movie";
+import { MovieRepository } from "../domain/movieRepository.interface";
+import { CreateMovieDto, UpdateMovieDto } from "./dtos";
+import { createMovieDtoToMovie } from './mappers';
+import { movies } from "./movies";
 
 
 @Injectable()
@@ -32,5 +33,11 @@ export class InMemoryMovieRepository implements MovieRepository {
         movies[movieToUpdateIndex] = { ...movies[movieToUpdateIndex], ...movieToUpdate, slug: movieSlug }
 
         return movies[movieToUpdateIndex]
+    }
+    createAMovie(movieToCreate: CreateMovieDto): Movie {
+        const movieToAdd: Movie = createMovieDtoToMovie(movieToCreate)
+        movies.push(movieToAdd)
+
+        return movieToAdd
     }
 }
