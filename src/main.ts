@@ -1,23 +1,28 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { ValidationPipe } from "@nestjs/common";
+import {Logger, ValidationPipe, VersioningType} from "@nestjs/common";
 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  app.setGlobalPrefix('movies')
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
       .setTitle('Movies')
-      .setDescription('The Movie API description')
-      .setVersion('0.0.1')
-      .addTag('movies')
-      .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+      .setDescription(`Cette API permet de manipuler des films.`)
+      .setVersion('1.0.0')
+      .build()
 
-  await app.listen(3000);
+  app.enableVersioning({ type: VersioningType.URI })
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('api', app, document)
+  app.enableCors()
+  await app.listen(3000)
+
+  const logger = new Logger('bootstrap')
+  logger.log(`Listening on ${await app.getUrl()}/movies`)
+  logger.log(`API documentation available on ${await app.getUrl()}/api`)
 }
 bootstrap();
