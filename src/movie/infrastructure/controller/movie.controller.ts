@@ -1,11 +1,22 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Inject, Param, Post, Put } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Inject,
+    Param,
+    Post,
+    Put,
+    UseGuards
+} from '@nestjs/common';
 import { ApiTags } from "@nestjs/swagger";
 import { Movie } from "../../domain/movie";
 import { MovieRepository } from "../../domain/movieRepository.interface";
 import { CreateMovieDto, UpdateMovieDto } from "../dtos";
+import {AuthGuard} from "../../../auth/auth.guard";
 
 @ApiTags('movies')
-@Controller('movies')
+@Controller('')
 export class MovieController {
     constructor(@Inject(MovieRepository) private readonly movieRepository: MovieRepository) {
     }
@@ -15,6 +26,7 @@ export class MovieController {
         return this.movieRepository.getMovies()
     }
 
+    @UseGuards(AuthGuard)
     @Delete('/:movieSlug')
     deleteMovieBySlug(@Param('movieSlug') movieSlug: string): string {
         return this.movieRepository.deleteAMovieBySug(movieSlug)
