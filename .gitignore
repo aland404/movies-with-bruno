@@ -8,3 +8,7 @@ dist
 
 # yarn
 yarn-error.log
+
+# bruno collection files
+**/run-collect-results.json
+# **/.env # this file should not be commited, but it is here for the demo purpose
