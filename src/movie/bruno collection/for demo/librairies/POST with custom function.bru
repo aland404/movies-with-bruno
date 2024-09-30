@@ -1,5 +1,5 @@
 meta {
-  name: Create a movie with generated data
+  name: POST with custom function
   type: http
   seq: 2
 }
@@ -12,12 +12,13 @@ post {
 
 script:pre-request {
   const { randMovie, randFirstName, randLastName, randPastDate } = require('@ngneat/falso')
+  const { toSeparatedHyphens } = require("./lib/transform")
   
   const randomTitle = randMovie()
   
   req.setBody({
     title: randomTitle,
-    slug: transformToHyphenSeparated(randomTitle),
+    slug: toSeparatedHyphens(randomTitle),
     actors: `${randFirstName()} ${randLastName()}`,
     boxOffice: "My boxOffice",
     director: "My director",
@@ -33,11 +34,4 @@ script:pre-request {
     poster: "My poster",
     released: "My released"
   });
-  
-  function transformToHyphenSeparated(sentence) {
-      const lowerCaseSentence = sentence.toLowerCase();
-      const hyphenSeparated = lowerCaseSentence.replace(/\s+/g, '-');
-  
-      return hyphenSeparated;
-  }
 }

@@ -1,0 +1,43 @@
+meta {
+  name: POST with generated data
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/movies
+  body: none
+  auth: none
+}
+
+script:pre-request {
+  const { randMovie, randFirstName, randLastName, randPastDate } = require('@ngneat/falso')
+  
+  const randomTitle = randMovie()
+  
+  req.setBody({
+    title: randomTitle,
+    slug: transformToHyphenSeparated(randomTitle),
+    actors: `${randFirstName()} ${randLastName()}`,
+    boxOffice: "My boxOffice",
+    director: "My director",
+    genre: "My genre",
+    plot: "My plot",
+    runtime: "My runtime",
+    type: "My type",
+    writer: `${randFirstName()} ${randLastName()}`,
+    year: randPastDate({ years: 20 }).getFullYear().toString(),
+    awards: "My awards",
+    imdbRating: "My imdbRating",
+    imdbVotes: "My imdbVotes",
+    poster: "My poster",
+    released: "My released"
+  });
+    
+  function transformToHyphenSeparated(sentence) {
+    const lowerCaseSentence = sentence.toLowerCase();
+    const hyphenSeparated = lowerCaseSentence.replace(/\s+/g, '-');
+  
+    return hyphenSeparated;
+  }
+}

@@ -1,0 +1,17 @@
+meta {
+  name: POST with random generated body
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/movies
+  body: none
+  auth: none
+}
+
+script:pre-request {
+  const { generateRandomMovieToPost } = require("./lib/generate")
+  
+  req.setBody(generateRandomMovieToPost({ awards: 'my custom awards' }));
+}
