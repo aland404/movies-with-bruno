@@ -1,24 +1,21 @@
 meta {
   name: Update a movie with vars
   type: http
-  seq: 1
+  seq: 3
 }
 
 put {
-  url: {{baseUrl}}/movies/a-nightmare-on-elm-street
+  url: {{baseUrl}}/movies/{{slug}}
   body: formUrlEncoded
   auth: none
 }
 
 body:form-urlencoded {
-  slug: {{slug}}
-  title: {{title}}
+  slug: {{slugWithVar}}
+  title: {{titleWithVar}}
 }
 
 vars:pre-request {
-  slug: a-nightmare-on-elm-street
-}
-
-script:pre-request {
-  bru.setVar("title", "My new title");
+  slugWithVar: a-nightmare-on-elm-street
+  titleWithVar: A unicorn in the garden
 }

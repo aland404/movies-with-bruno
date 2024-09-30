@@ -1,0 +1,58 @@
+meta {
+  name: Get a movie advanced tests
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/movies/the-shining
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.responseTime: lte 100
+  res.body.hasOwnProperty("slug"): isTruthy
+}
+
+tests {
+  const Ajv = require("ajv")
+  const ajv = new Ajv()
+  
+  test('Vérification du statut http', function(){
+    expect(res.getStatus(), 200)
+  })
+  
+  test("Response time is less than 200ms", function () {
+      expect(res.getResponseTime()).to.be.below(200);
+  })
+  
+  test("Respecte le contrat d'interface attendu", function() {
+    expect(res.getBody()).to.be.an("object")
+    expect(res.getBody()).to.have.property('slug')
+    expect(res.getBody()).to.have.property('slug', 'the-shining')
+    expect(res.getBody()).to.deep.include({title: 'The Shining'})
+  expect(res.getBody()).to.have.deep.nested
+    .property('awards');
+  expect(res.getBody()).to.have.deep.nested
+    .property('actors', 'Jack Nicholson, Shelley Duvall, Danny Lloyd');
+  })
+  
+  test("Valide le schéma json attendu", function() {
+    const movieSchema = {
+      type: "object",
+      properties: {
+        actors: {type: "string"},
+        released: {type: "string"}
+      },
+      required: ["slug"],
+      additionalProperties: true
+    }
+    const validate = ajv.compile(movieSchema)
+  const valid = validate(res.getBody())
+  if (!valid) console.log(validate.errors)
+  expect(validate.errors).to.be.null
+  
+  })
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Check update with vars
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/movies/{{slug}}
+  body: none
+  auth: none
+}
+
+assert {
+  res.body.title: eq A unicorn in the garden
+}

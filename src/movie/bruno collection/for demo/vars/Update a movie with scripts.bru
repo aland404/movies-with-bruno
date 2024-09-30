@@ -1,0 +1,21 @@
+meta {
+  name: Update a movie with scripts
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/movies/{{slug}}
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  slug: {{slug}}
+  title: {{title}}
+}
+
+script:pre-request {
+  bru.setVar("title", "A puppy playing with a cat");
+  bru.setVar("slug", "a-nightmare-on-elm-street");
+}

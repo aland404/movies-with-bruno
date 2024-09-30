@@ -2,9 +2,9 @@
   "name": "movie-bruno-api-collection",
   "version": "1.0.0",
   "dependencies": {
-    "@ngneat/falso": "^7.2.0"
+    "@ngneat/falso": "^7.2.0",
+    "ajv": "^8.17.1"
   },
-
   "devDependencies": {
     "@usebruno/cli": "^1.16.0"
   },
