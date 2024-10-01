@@ -1,0 +1,126 @@
+openapi: 3.0.0
+paths:
+  /movies:
+    get:
+      operationId: MovieController_getMovies
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+        - movies
+    post:
+      operationId: MovieController_createAMovie
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMovieDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+        - movies
+  /movies/{movieSlug}:
+    delete:
+      operationId: MovieController_deleteMovieBySlug
+      parameters:
+        - name: movieSlug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags:
+        - movies
+    get:
+      operationId: MovieController_getAMovieBySlug
+      parameters:
+        - name: movieSlug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+        - movies
+    put:
+      operationId: MovieController_updateAMovie
+      parameters:
+        - name: movieSlug
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMovieDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+        - movies
+  /movies/auth/login:
+    post:
+      operationId: AuthController_signIn
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /movies/auth/profile:
+    get:
+      operationId: AuthController_getProfile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+info:
+  title: Movies
+  description: Cette API permet de manipuler des films.
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    CreateMovieDto:
+      type: object
+      properties: {}
+    UpdateMovieDto:
+      type: object
+      properties: {}
