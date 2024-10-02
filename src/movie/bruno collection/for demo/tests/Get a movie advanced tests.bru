@@ -50,9 +50,10 @@ tests {
       additionalProperties: true
     }
     const validate = ajv.compile(movieSchema)
-  const valid = validate(res.getBody())
-  if (!valid) console.log(validate.errors)
-  expect(validate.errors).to.be.null
+    const valid = validate(res.getBody())
+    
+    if (!valid) console.log(validate.errors)
+    expect(validate.errors).to.be.null
   
   })
 }
