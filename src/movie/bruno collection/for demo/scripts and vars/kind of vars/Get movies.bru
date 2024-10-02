@@ -1,0 +1,37 @@
+meta {
+  name: Get movies
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/movies
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  test: Requête Get movies au PRE request
+}
+
+vars:post-response {
+  test: "Requête Get Movies au POST request"
+}
+
+script:post-response {
+  var textCss = 'background: darkgrey; color: white; border-radius: 3px;';
+  
+  console.log(`%c Variable de collection : %c ${bru.getCollectionVar('test')}`, textCss, 'color: blue;');
+  
+  console.log(`%c Variable d'environnement : %c ${bru.getEnvVar('test')}`, textCss, 'color: green;')
+  
+  console.log(`%c Variable de dossier : %c ${bru.getFolderVar('test')}`, textCss, 'color: red;')
+  
+  console.log(`%c Variable de requête : %c ${bru.getRequestVar('test')}`, textCss, 'color: darkorange;')
+  
+  console.log(`%c Variable du contexte : %c ${bru.getVar('test')}`, textCss, 'color: purple;')
+}
+
+docs {
+  Lecture de la liste de tous les films
+}
