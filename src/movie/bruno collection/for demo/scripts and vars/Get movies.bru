@@ -1,0 +1,23 @@
+meta {
+  name: Get movies
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/movies
+  body: none
+  auth: none
+}
+
+script:pre-request {
+  console.log("Request: ", req.getUrl())
+}
+
+script:post-response {
+  console.log("Response:", res.getBody())
+}
+
+docs {
+  Lecture de la liste de tous les films
+}

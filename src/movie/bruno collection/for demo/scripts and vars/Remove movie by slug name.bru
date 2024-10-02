@@ -1,0 +1,40 @@
+meta {
+  name: Remove movie by slug name
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{baseUrl}}/movies/the-shining
+  body: none
+  auth: none
+}
+
+headers {
+  authorization: Bearer {{deleteAccessToken}}
+}
+
+script:pre-request {
+  const accessToken = bru.getVar('deleteAccessToken')
+  const doesTokenExist = !!accessToken
+  let isTokenExpired = false
+  
+  if(doesTokenExist) {
+    const { atob } = require("atob");
+  
+    const decode = JSON.parse(atob(accessToken.split('.')[1]));
+  
+    isTokenExpired = decode.exp * 1000 < new Date().getTime()
+  }
+  
+  if(!doesTokenExist || isTokenExpired) {
+    const baseUrl = bru.getEnvVar("baseUrl");
+    const axios = require("axios");
+    const response = await axios.post(`${baseUrl}/movies/auth/login`, {
+      username: "john",
+      password: "changeme"
+    });
+  
+    bru.setVar("deleteAccessToken", response.data.access_token);
+  }
+}
