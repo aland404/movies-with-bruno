@@ -8,9 +8,9 @@
     "@usebruno/cli": "^1.16.0"
   },
   "scripts": {
-    "run": "bru run .",
-    "run:local": "bru run . --env localhost",
-    "run:collect": "bru run . --env localhost --output run-collect-results.json"
+    "run": "bru run . -r",
+    "run:local": "bru run . -r --env localhost",
+    "run:collect": "bru run . -r --env localhost --output run-collect-results.json"
   },
   "license": "MIT"
 }
