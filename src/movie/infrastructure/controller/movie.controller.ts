@@ -14,16 +14,19 @@ import { Movie } from "../../domain/movie";
 import { MovieRepository } from "../../domain/movieRepository.interface";
 import { CreateMovieDto, UpdateMovieDto } from "../dtos";
 import {AuthGuard} from "../../../auth/auth.guard";
+import {GetMoviesUseCase} from "../../use-cases/get-movies/get-movies.use-case";
 
 @ApiTags('movies')
 @Controller('')
 export class MovieController {
-    constructor(@Inject(MovieRepository) private readonly movieRepository: MovieRepository) {
-    }
+    constructor(
+        @Inject(MovieRepository) private readonly movieRepository: MovieRepository,
+        private readonly getMovieUseCase: GetMoviesUseCase)
+    {}
 
     @Get('/')
     getMovies(): Movie[] {
-        return this.movieRepository.getMovies()
+        return this.getMovieUseCase.execute()
     }
 
     @UseGuards(AuthGuard)

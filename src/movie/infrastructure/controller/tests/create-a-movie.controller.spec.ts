@@ -5,6 +5,7 @@ import { CreateMovieDto } from "../../dtos";
 import { InMemoryMovieRepository } from "../../movie.repository";
 import { MovieController } from "../movie.controller";
 import { HttpException } from '@nestjs/common';
+import {getTestingModule} from "./utils";
 
 const MockedMovies = jest.requireMock('../../movies');
 
@@ -18,10 +19,7 @@ describe('UNIT - AppController - createAMovie', () => {
   beforeEach(async () => {
     jest.resetModules()
 
-    const app: TestingModule = await Test.createTestingModule({
-      controllers: [MovieController],
-      providers: [{provide: MovieRepository, useClass: InMemoryMovieRepository}],
-    }).compile();
+    const app: TestingModule = await getTestingModule()
 
     appController = app.get<MovieController>(MovieController);
   });

@@ -3,6 +3,10 @@ import { MovieRepository } from "../../../domain/movieRepository.interface";
 import { moviesForTest } from "../../../tests/data/movies";
 import { InMemoryMovieRepository } from "../../movie.repository";
 import { MovieController } from "../movie.controller";
+import {GetMoviesUseCase} from "../../../use-cases/get-movies/get-movies.use-case";
+import {AuthModule} from "../../../../auth/auth.module";
+import {UsersModule} from "../../../../users/users.module";
+import {getTestingModule} from "./utils";
 
 const MockedMovies = jest.requireMock('../../movies');
 
@@ -16,12 +20,9 @@ describe('UNIT - AppController - getMovies', () => {
   beforeEach(async () => {
     jest.resetModules()
 
-    const app: TestingModule = await Test.createTestingModule({
-      controllers: [MovieController],
-      providers: [{provide: MovieRepository, useClass: InMemoryMovieRepository}],
-    }).compile();
+    const app: TestingModule = await getTestingModule()
 
-    appController = app.get<MovieController>(MovieController);
+    appController = app.get<MovieController>(MovieController)
   });
 
   describe('getMovies', () => {

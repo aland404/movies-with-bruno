@@ -3,6 +3,7 @@ import { MovieRepository } from "../../../domain/movieRepository.interface";
 import { moviesForTest } from "../../../tests/data/movies";
 import { InMemoryMovieRepository } from "../../movie.repository";
 import { MovieController } from "../movie.controller";
+import {getTestingModule} from "./utils";
 
 const MockedMovies = jest.requireMock('../../movies');
 
@@ -16,10 +17,7 @@ describe('UNIT - AppController - getAMovieBySlug', () => {
   beforeEach(async () => {
     jest.resetModules()
 
-    const app: TestingModule = await Test.createTestingModule({
-      controllers: [MovieController],
-      providers: [{provide: MovieRepository, useClass: InMemoryMovieRepository}],
-    }).compile();
+    const app: TestingModule = await getTestingModule()
 
     appController = app.get<MovieController>(MovieController);
   });
