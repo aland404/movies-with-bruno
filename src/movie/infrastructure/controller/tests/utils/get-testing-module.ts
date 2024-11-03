@@ -4,12 +4,12 @@ import {UsersModule} from "../../../../../users/users.module";
 import {MovieController} from "../../movie.controller";
 import {MovieRepository} from "../../../../domain/movieRepository.interface";
 import {InMemoryMovieRepository} from "../../../movie.repository";
-import {GetMoviesUseCase} from "../../../../use-cases/get-movies/get-movies.use-case";
+import {DeleteAMovieUseCase, GetMoviesUseCase} from "../../../../use-cases";
 
 export async function getTestingModule(): Promise<TestingModule> {
     return await Test.createTestingModule({
         imports: [AuthModule, UsersModule],
         controllers: [MovieController],
-        providers: [{provide: MovieRepository, useClass: InMemoryMovieRepository}, GetMoviesUseCase],
+        providers: [{provide: MovieRepository, useClass: InMemoryMovieRepository}, GetMoviesUseCase, DeleteAMovieUseCase],
     }).compile()
 }

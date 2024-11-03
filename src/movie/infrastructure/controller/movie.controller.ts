@@ -14,19 +14,21 @@ import { Movie } from "../../domain/movie";
 import { MovieRepository } from "../../domain/movieRepository.interface";
 import { CreateMovieDto, UpdateMovieDto } from "../dtos";
 import {AuthGuard} from "../../../auth/auth.guard";
-import {GetMoviesUseCase} from "../../use-cases/get-movies/get-movies.use-case";
+import {GetMoviesUseCase} from "../../use-cases/get-movies.use-case";
+import {DeleteAMovieUseCase} from "../../use-cases/delete-a-movie.use-case";
 
 @ApiTags('movies')
 @Controller('movies')
 export class MovieController {
     constructor(
         @Inject(MovieRepository) private readonly movieRepository: MovieRepository,
-        private readonly getMovieUseCase: GetMoviesUseCase)
+        private readonly getMoviesUseCase: GetMoviesUseCase,
+        private readonly deleteAMovieUseCase: DeleteAMovieUseCase)
     {}
 
     @Get('/')
     getMovies(): Movie[] {
-        return this.getMovieUseCase.execute()
+        return this.getMoviesUseCase.execute()
     }
 
     @Get('/:movieSlug')
@@ -37,7 +39,7 @@ export class MovieController {
     @UseGuards(AuthGuard)
     @Delete('/:movieSlug')
     deleteMovieBySlug(@Param('movieSlug') movieSlug: string): string {
-        return this.movieRepository.deleteAMovieBySug(movieSlug)
+        return this.deleteAMovieUseCase.execute(movieSlug)
     }
 
     @Post('/')

@@ -1,5 +1,5 @@
-import {Movie} from "../../domain/movie";
-import {MovieRepository} from "../../domain/movieRepository.interface";
+import {Movie} from "../domain/movie";
+import {MovieRepository} from "../domain/movieRepository.interface";
 import {Inject, Injectable} from "@nestjs/common";
 
 @Injectable()

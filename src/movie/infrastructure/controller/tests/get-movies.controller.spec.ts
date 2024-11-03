@@ -1,11 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { MovieRepository } from "../../../domain/movieRepository.interface";
+import { TestingModule } from '@nestjs/testing';
 import { moviesForTest } from "../../../tests/data/movies";
-import { InMemoryMovieRepository } from "../../movie.repository";
 import { MovieController } from "../movie.controller";
-import {GetMoviesUseCase} from "../../../use-cases/get-movies/get-movies.use-case";
-import {AuthModule} from "../../../../auth/auth.module";
-import {UsersModule} from "../../../../users/users.module";
 import {getTestingModule} from "./utils";
 
 const MockedMovies = jest.requireMock('../../movies');
