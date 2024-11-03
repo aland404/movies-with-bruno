@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Inject,
   Param,
   Post,
@@ -18,6 +20,7 @@ import { GetMoviesUseCase } from '../../use-cases/get-movies.use-case'
 import { DeleteAMovieUseCase } from '../../use-cases/delete-a-movie.use-case'
 import { GetAMovieUseCase } from '../../use-cases/get-a-movie.use-case'
 import { CreateAMovieUseCase } from '../../use-cases/create-a-movie.use-case'
+import { UpdateAMovieUseCase } from '../../use-cases'
 
 @ApiTags('movies')
 @Controller('movies')
@@ -28,6 +31,7 @@ export class MovieController {
         private readonly getMoviesUseCase: GetMoviesUseCase,
         private readonly getAMovieUseCase: GetAMovieUseCase,
         private readonly deleteAMovieUseCase: DeleteAMovieUseCase,
+        private readonly updateAMovieUseCase: UpdateAMovieUseCase,
   ) {}
 
   @Get('/')
@@ -53,6 +57,9 @@ export class MovieController {
 
   @Put('/:movieSlug')
   updateAMovie(@Param('movieSlug') movieSlug: string, @Body() movieToUpdate: UpdateMovieDto): Movie {
-    return this.movieRepository.updateAMovie(movieSlug, movieToUpdate)
+    if (movieSlug !== movieToUpdate.slug)
+      throw new HttpException('Slug in url and slug in body are different', HttpStatus.BAD_REQUEST)
+
+    return this.updateAMovieUseCase.execute(movieToUpdate)
   }
 }

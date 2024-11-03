@@ -1,4 +1,4 @@
-import { HttpException } from '@nestjs/common'
+import { HttpException, HttpStatus } from '@nestjs/common'
 import { TestingModule } from '@nestjs/testing'
 import { moviesForTest } from '../../../tests/data/movies'
 import { UpdateMovieDto } from '../../dtos'
@@ -94,6 +94,7 @@ describe('uNIT - AppController - updateAMovie', () => {
       }
       catch (error) {
         expect(error).toBeInstanceOf(HttpException)
+        expect(error.status).toBe(HttpStatus.BAD_REQUEST)
       }
     })
     it('should crash with no matching movie found error', async () => {
@@ -125,6 +126,7 @@ describe('uNIT - AppController - updateAMovie', () => {
       }
       catch (error) {
         expect(error).toBeInstanceOf(HttpException)
+        expect(error.status).toBe(HttpStatus.NOT_FOUND)
       }
     })
   })

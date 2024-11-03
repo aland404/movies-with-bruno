@@ -26,15 +26,12 @@ export class InMemoryMovieRepository implements MovieRepository {
     return movies.find(movie => movie.slug === slug)
   }
 
-  updateAMovie(movieSlug: string, movieToUpdate: UpdateMovieDto): Movie {
-    if (movieSlug !== movieToUpdate.slug)
-      throw new HttpException('Slug in url and slug in body are different', HttpStatus.BAD_REQUEST)
-
-    const movieToUpdateIndex = movies.findIndex(movie => movie.slug === movieSlug)
+  updateAMovie(movieToUpdate: UpdateMovieDto): Movie {
+    const movieToUpdateIndex = movies.findIndex(movie => movie.slug === movieToUpdate.slug)
     if (movieToUpdateIndex < 0)
       throw new HttpException('No corresponding movie found', HttpStatus.NOT_FOUND)
 
-    movies[movieToUpdateIndex] = { ...movies[movieToUpdateIndex], ...movieToUpdate, slug: movieSlug }
+    movies[movieToUpdateIndex] = { ...movies[movieToUpdateIndex], ...movieToUpdate }
 
     return movies[movieToUpdateIndex]
   }

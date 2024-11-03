@@ -6,7 +6,7 @@ export interface MovieRepository {
   getMovies: () => Movie[]
   deleteAMovieBySlug: (movieSlug: string) => string
   getAMovieBySlug: (slug: string) => Movie | undefined
-  updateAMovie: (movieSlug: string, movieToUpdate: UpdateMovieDto) => Movie
+  updateAMovie: (movieToUpdate: UpdateMovieDto) => Movie
 }
 
 // eslint-disable-next-line ts/no-redeclare
