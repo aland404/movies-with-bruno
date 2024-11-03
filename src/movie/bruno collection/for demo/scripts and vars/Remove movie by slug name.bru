@@ -30,7 +30,7 @@ script:pre-request {
   if(!doesTokenExist || isTokenExpired) {
     const baseUrl = bru.getEnvVar("baseUrl");
     const axios = require("axios");
-    const response = await axios.post(`${baseUrl}/movies/auth/login`, {
+    const response = await axios.post(`${baseUrl}/auth/login`, {
       username: "john",
       password: "changeme"
     });
