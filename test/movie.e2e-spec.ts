@@ -4,7 +4,7 @@ import * as request from 'supertest'
 import { JwtService } from '@nestjs/jwt'
 import { moviesForTest } from '../src/movie/tests/data/movies'
 import { UpdateMovieDto } from '../src/movie/infrastructure/dtos'
-import { AppModule } from './../src/app.module'
+import { AppModule } from '../src/app.module'
 
 const MockedMovies = jest.requireMock('../src/movie/infrastructure/movies')
 

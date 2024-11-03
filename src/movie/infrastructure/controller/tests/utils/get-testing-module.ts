@@ -1,21 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { AuthModule } from '../../../../../auth/auth.module'
-import { UsersModule } from '../../../../../users/users.module'
-import { MovieController } from '../../movie.controller'
-import { MovieRepository } from '../../../../domain/movieRepository.interface'
-import { InMemoryMovieRepository } from '../../../movie.repository'
-import {
-  CreateAMovieUseCase,
-  DeleteAMovieUseCase,
-  GetAMovieUseCase,
-  GetMoviesUseCase,
-  UpdateAMovieUseCase,
-} from '../../../../use-cases'
+import { appModuleMetadata } from '../../../../../app.module'
 
 export async function getTestingModule(): Promise<TestingModule> {
-  return await Test.createTestingModule({
-    imports: [AuthModule, UsersModule],
-    controllers: [MovieController],
-    providers: [{ provide: MovieRepository, useClass: InMemoryMovieRepository }, CreateAMovieUseCase, GetAMovieUseCase, GetMoviesUseCase, DeleteAMovieUseCase, UpdateAMovieUseCase],
-  }).compile()
+  return await Test.createTestingModule(appModuleMetadata).compile()
 }
