@@ -17,12 +17,14 @@ import { AuthGuard } from '../../../auth/auth.guard'
 import { GetMoviesUseCase } from '../../use-cases/get-movies.use-case'
 import { DeleteAMovieUseCase } from '../../use-cases/delete-a-movie.use-case'
 import { GetAMovieUseCase } from '../../use-cases/get-a-movie.use-case'
+import { CreateAMovieUseCase } from '../../use-cases/create-a-movie.use-case'
 
 @ApiTags('movies')
 @Controller('movies')
 export class MovieController {
   constructor(
         @Inject(MovieRepository) private readonly movieRepository: MovieRepository,
+        private readonly createAMovieUseCase: CreateAMovieUseCase,
         private readonly getMoviesUseCase: GetMoviesUseCase,
         private readonly getAMovieUseCase: GetAMovieUseCase,
         private readonly deleteAMovieUseCase: DeleteAMovieUseCase,
@@ -46,7 +48,7 @@ export class MovieController {
 
   @Post('/')
   createAMovie(@Body() movieToCreate: CreateMovieDto): Movie {
-    return this.movieRepository.createAMovie(movieToCreate)
+    return this.createAMovieUseCase.execute(movieToCreate)
   }
 
   @Put('/:movieSlug')
