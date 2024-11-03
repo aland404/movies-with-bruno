@@ -1,19 +1,18 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import {Logger, ValidationPipe, VersioningType} from "@nestjs/common";
-
+import { NestFactory } from '@nestjs/core'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import { Logger, ValidationPipe, VersioningType } from '@nestjs/common'
+import { AppModule } from './app.module'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule)
   app.setGlobalPrefix('movies')
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe())
 
   const config = new DocumentBuilder()
-      .setTitle('Movies')
-      .setDescription(`Cette API permet de manipuler des films.`)
-      .setVersion('1.0.0')
-      .build()
+    .setTitle('Movies')
+    .setDescription(`Cette API permet de manipuler des films.`)
+    .setVersion('1.0.0')
+    .build()
 
   app.enableVersioning({ type: VersioningType.URI })
   const document = SwaggerModule.createDocument(app, config)
@@ -25,4 +24,4 @@ async function bootstrap() {
   logger.log(`Listening on ${await app.getUrl()}/movies`)
   logger.log(`API documentation available on ${await app.getUrl()}/api`)
 }
-bootstrap();
+bootstrap()

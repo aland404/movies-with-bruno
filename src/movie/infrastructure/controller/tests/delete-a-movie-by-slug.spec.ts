@@ -1,24 +1,24 @@
-import { TestingModule } from '@nestjs/testing';
-import { moviesForTest } from "../../../tests/data/movies";
-import { MovieController } from "../movie.controller";
-import {getTestingModule} from "./utils";
+import { TestingModule } from '@nestjs/testing'
+import { moviesForTest } from '../../../tests/data/movies'
+import { MovieController } from '../movie.controller'
+import { getTestingModule } from './utils'
 
-const MockedMovies = jest.requireMock('../../movies');
+const MockedMovies = jest.requireMock('../../movies')
 
 jest.mock('../../movies', () => ({
-  movies: []
+  movies: [],
 }))
 
-describe('UNIT - AppController - deleteAMovieBySlug', () => {
-  let appController: MovieController;
+describe('uNIT - AppController - deleteAMovieBySlug', () => {
+  let appController: MovieController
 
   beforeEach(async () => {
     jest.resetModules()
 
     const app: TestingModule = await getTestingModule()
 
-    appController = app.get<MovieController>(MovieController);
-  });
+    appController = app.get<MovieController>(MovieController)
+  })
 
   describe('deleteAMovieBySlug', () => {
     it('should delete the first movie', () => {
@@ -27,8 +27,8 @@ describe('UNIT - AppController - deleteAMovieBySlug', () => {
 
       const deletedInfo = appController.deleteMovieBySlug(movieToDelete.slug)
 
-      expect(deletedInfo).toBe(`Movie with slug ${movieToDelete.slug} has been deleted`);
-    });
+      expect(deletedInfo).toBe(`Movie with slug ${movieToDelete.slug} has been deleted`)
+    })
 
     it('should delete the second movie', () => {
       MockedMovies.movies = [...moviesForTest.twoRandomMovies]
@@ -36,7 +36,7 @@ describe('UNIT - AppController - deleteAMovieBySlug', () => {
 
       const deletedInfo = appController.deleteMovieBySlug(movieToDelete.slug)
 
-      expect(deletedInfo).toBe(`Movie with slug ${movieToDelete.slug} has been deleted`);
-    });
-  });
-});
+      expect(deletedInfo).toBe(`Movie with slug ${movieToDelete.slug} has been deleted`)
+    })
+  })
+})

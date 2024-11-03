@@ -16,7 +16,8 @@ export class AppLoggerMiddleware implements NestMiddleware {
       const contentLength = response.get('content-length')
 
       this.logger.log(`${method} ${ip}${url} || statusCode: ${statusCode} || contentLength: ${contentLength} || userAgent: ${userAgent}`)
-      if(body) this.logger.log(`Body used : `, body)
+      if (body)
+        this.logger.log(`Body used : `, body)
     })
 
     next()

@@ -1,16 +1,16 @@
-import { TestingModule } from '@nestjs/testing';
-import { moviesForTest } from "../../../tests/data/movies";
-import { MovieController } from "../movie.controller";
-import {getTestingModule} from "./utils";
+import { TestingModule } from '@nestjs/testing'
+import { moviesForTest } from '../../../tests/data/movies'
+import { MovieController } from '../movie.controller'
+import { getTestingModule } from './utils'
 
-const MockedMovies = jest.requireMock('../../movies');
+const MockedMovies = jest.requireMock('../../movies')
 
 jest.mock('../../movies', () => ({
-  movies: []
+  movies: [],
 }))
 
-describe('UNIT - AppController - getMovies', () => {
-  let appController: MovieController;
+describe('uNIT - AppController - getMovies', () => {
+  let appController: MovieController
 
   beforeEach(async () => {
     jest.resetModules()
@@ -18,7 +18,7 @@ describe('UNIT - AppController - getMovies', () => {
     const app: TestingModule = await getTestingModule()
 
     appController = app.get<MovieController>(MovieController)
-  });
+  })
 
   describe('getMovies', () => {
     it('should return 2 movies', () => {
@@ -26,7 +26,7 @@ describe('UNIT - AppController - getMovies', () => {
 
       const foundMovies = appController.getMovies()
 
-      expect(foundMovies.length).toBe(2);
-    });
-  });
-});
+      expect(foundMovies.length).toBe(2)
+    })
+  })
+})

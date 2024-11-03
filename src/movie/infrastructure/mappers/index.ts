@@ -1,1 +1,1 @@
-export * from "./create-movie-dto-to-movie"
+export * from './create-movie-dto-to-movie'

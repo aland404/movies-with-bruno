@@ -1,26 +1,24 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { MovieRepository } from "../../../domain/movieRepository.interface";
-import { moviesForTest } from "../../../tests/data/movies";
-import { InMemoryMovieRepository } from "../../movie.repository";
-import { MovieController } from "../movie.controller";
-import {getTestingModule} from "./utils";
+import { TestingModule } from '@nestjs/testing'
+import { moviesForTest } from '../../../tests/data/movies'
+import { MovieController } from '../movie.controller'
+import { getTestingModule } from './utils'
 
-const MockedMovies = jest.requireMock('../../movies');
+const MockedMovies = jest.requireMock('../../movies')
 
 jest.mock('../../movies', () => ({
-  movies: []
+  movies: [],
 }))
 
-describe('UNIT - AppController - getAMovieBySlug', () => {
-  let appController: MovieController;
+describe('uNIT - AppController - getAMovieBySlug', () => {
+  let appController: MovieController
 
   beforeEach(async () => {
     jest.resetModules()
 
     const app: TestingModule = await getTestingModule()
 
-    appController = app.get<MovieController>(MovieController);
-  });
+    appController = app.get<MovieController>(MovieController)
+  })
 
   describe('getAMovieBySlug', () => {
     it('should find the corresponding movie', () => {
@@ -29,9 +27,8 @@ describe('UNIT - AppController - getAMovieBySlug', () => {
 
       const foundMovie = appController.getAMovieBySlug(movieToFind.slug)
 
-      expect(foundMovie).toBe(movieToFind);
-    });
-
+      expect(foundMovie).toBe(movieToFind)
+    })
 
     it('should not find the corresponding movie', () => {
       MockedMovies.movies = [...moviesForTest.twoRandomMovies]
@@ -39,7 +36,7 @@ describe('UNIT - AppController - getAMovieBySlug', () => {
 
       const foundMovie = appController.getAMovieBySlug(movieToFind.slug)
 
-      expect(foundMovie).toBe(undefined);
-    });
-  });
-});
+      expect(foundMovie).toBe(undefined)
+    })
+  })
+})
