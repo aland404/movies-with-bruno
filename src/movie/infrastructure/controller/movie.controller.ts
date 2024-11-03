@@ -17,7 +17,7 @@ import {AuthGuard} from "../../../auth/auth.guard";
 import {GetMoviesUseCase} from "../../use-cases/get-movies/get-movies.use-case";
 
 @ApiTags('movies')
-@Controller('')
+@Controller('movies')
 export class MovieController {
     constructor(
         @Inject(MovieRepository) private readonly movieRepository: MovieRepository,
@@ -29,23 +29,21 @@ export class MovieController {
         return this.getMovieUseCase.execute()
     }
 
+    @Get('/:movieSlug')
+    getAMovieBySlug(@Param('movieSlug') movieSlug: string): Movie | undefined {
+        return this.movieRepository.getAMovieBySlug(movieSlug)
+    }
+
     @UseGuards(AuthGuard)
     @Delete('/:movieSlug')
     deleteMovieBySlug(@Param('movieSlug') movieSlug: string): string {
         return this.movieRepository.deleteAMovieBySug(movieSlug)
     }
 
-    @Get('/:movieSlug')
-    getAMovieBySlug(@Param('movieSlug') movieSlug: string): Movie | undefined {
-        return this.movieRepository.getAMovieBySlug(movieSlug)
-    }
-
-
     @Post('/')
     createAMovie(@Body() movieToCreate: CreateMovieDto): Movie {
         return this.movieRepository.createAMovie(movieToCreate);
     }
-
 
     @Put('/:movieSlug')
     updateAMovie(@Param('movieSlug') movieSlug: string, @Body() movieToUpdate: UpdateMovieDto): Movie {
