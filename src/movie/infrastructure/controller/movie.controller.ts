@@ -12,9 +12,8 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-import { Movie } from '../../domain/movie'
 import { MovieRepository } from '../../domain/movieRepository.interface'
-import { CreateMovieDto, UpdateMovieDto } from '../dtos'
+import { CreateMovieDto, MovieDTO, UpdateMovieDto } from '../dtos'
 import { AuthGuard } from '../../../auth/auth.guard'
 import { GetMoviesUseCase } from '../../use-cases/get-movies.use-case'
 import { DeleteAMovieUseCase } from '../../use-cases/delete-a-movie.use-case'
@@ -35,12 +34,12 @@ export class MovieController {
   ) {}
 
   @Get('/')
-  getMovies(): Movie[] {
+  getMovies(): MovieDTO[] {
     return this.getMoviesUseCase.execute()
   }
 
   @Get('/:movieSlug')
-  getAMovieBySlug(@Param('movieSlug') movieSlug: string): Movie | undefined {
+  getAMovieBySlug(@Param('movieSlug') movieSlug: string): MovieDTO | undefined {
     return this.getAMovieUseCase.execute(movieSlug)
   }
 
@@ -51,12 +50,12 @@ export class MovieController {
   }
 
   @Post('/')
-  createAMovie(@Body() movieToCreate: CreateMovieDto): Movie {
+  createAMovie(@Body() movieToCreate: CreateMovieDto): MovieDTO {
     return this.createAMovieUseCase.execute(movieToCreate)
   }
 
   @Put('/:movieSlug')
-  updateAMovie(@Param('movieSlug') movieSlug: string, @Body() movieToUpdate: UpdateMovieDto): Movie {
+  updateAMovie(@Param('movieSlug') movieSlug: string, @Body() movieToUpdate: UpdateMovieDto): MovieDTO {
     if (movieSlug !== movieToUpdate.slug)
       throw new HttpException('Slug in url and slug in body are different', HttpStatus.BAD_REQUEST)
 

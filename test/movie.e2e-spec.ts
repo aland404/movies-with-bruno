@@ -5,6 +5,7 @@ import { JwtService } from '@nestjs/jwt'
 import { moviesForTest } from '../src/movie/tests/data/movies'
 import { UpdateMovieDto } from '../src/movie/infrastructure/dtos'
 import { AppModule } from '../src/app.module'
+import { toMovieDTO } from '../src/movie/domain/mappers'
 
 const MockedMovies = jest.requireMock('../src/movie/infrastructure/movies')
 
@@ -31,7 +32,7 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/movies')
       .expect(HttpStatus.OK)
-      .expect(MockedMovies.movies)
+      .expect(MockedMovies.movies.map(toMovieDTO))
   })
 
   it('/movies/:movieSlug (GET 200)', () => {
@@ -40,7 +41,7 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get(`/movies/${movieToGet.slug}`)
       .expect(HttpStatus.OK)
-      .expect(movieToGet)
+      .expect(toMovieDTO(movieToGet))
   })
 
   it('/movies/:movieSlug (DELETE 200)', async () => {

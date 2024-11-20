@@ -13,7 +13,7 @@ get {
 assert {
   res.status: eq 200
   res.responseTime: lte 100
-  res.body.hasOwnProperty("slug"): isTruthy
+  res.body.hasOwnProperty("title"): isTruthy
 }
 
 tests {
@@ -30,21 +30,20 @@ tests {
   
   test("Respecte le contrat d'interface attendu", function() {
     expect(res.getBody()).to.be.an("object")
-    expect(res.getBody()).to.have.property('slug')
-    expect(res.getBody()).to.have.property('slug', 'the-shining')
+    expect(res.getBody()).to.have.property('title')
+    expect(res.getBody()).to.have.property('title', 'The Shining')
     expect(res.getBody()).to.deep.include({title: 'The Shining'})
-    expect(res.getBody()).to.have.deep.nested.property('awards');
-    expect(res.getBody()).to.have.deep.nested.property('actors', 'Jack Nicholson, Shelley Duvall, Danny Lloyd');
+    expect(res.getBody()).to.have.deep.nested.property('director', 'Stanley Kubrick');
   })
   
   test("Respecte le contrat d'interface attendu avec ajv", function() {
     const movieSchema = {
       type: "object",
       properties: {
-        actors: {type: "string"},
+        director: {type: "string"},
         released: {type: "string"}
       },
-      required: ["slug"],
+      required: ["title"],
       additionalProperties: true
     }
     const validate = ajv.compile(movieSchema)

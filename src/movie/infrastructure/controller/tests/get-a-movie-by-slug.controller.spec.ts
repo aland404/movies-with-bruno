@@ -1,6 +1,7 @@
 import { TestingModule } from '@nestjs/testing'
 import { moviesForTest } from '../../../tests/data/movies'
 import { MovieController } from '../movie.controller'
+import { toMovieDTO } from '../../../domain/mappers'
 import { getTestingModule } from './utils'
 
 const MockedMovies = jest.requireMock('../../movies')
@@ -24,10 +25,11 @@ describe('uNIT - AppController - getAMovieBySlug', () => {
     it('should find the corresponding movie', () => {
       MockedMovies.movies = [...moviesForTest.twoRandomMovies]
       const movieToFind = moviesForTest.twoRandomMovies[1]
+      const movieToFindDTO = toMovieDTO(moviesForTest.twoRandomMovies[1])
 
       const foundMovie = appController.getAMovieBySlug(movieToFind.slug)
 
-      expect(foundMovie).toBe(movieToFind)
+      expect(foundMovie).toStrictEqual(movieToFindDTO)
     })
 
     it('should not find the corresponding movie', () => {
