@@ -3,7 +3,7 @@ import { Movie } from '../domain/movie'
 import { MovieRepository } from '../domain/movieRepository.interface'
 import { CreateMovieDto, UpdateMovieDto } from './dtos'
 import { createMovieDtoToMovie } from './mappers'
-import { movies } from './movies'
+import { movies } from './casino-movies'
 
 @Injectable()
 export class InMemoryMovieRepository implements MovieRepository {

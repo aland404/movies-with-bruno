@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/movies/the-shining
+  url: {{baseUrl}}/movies/the-cooler
   body: none
   auth: none
 }
@@ -31,9 +31,9 @@ tests {
   test("Respecte le contrat d'interface attendu", function() {
     expect(res.getBody()).to.be.an("object")
     expect(res.getBody()).to.have.property('title')
-    expect(res.getBody()).to.have.property('title', 'The Shining')
-    expect(res.getBody()).to.deep.include({title: 'The Shining'})
-    expect(res.getBody()).to.have.deep.nested.property('director', 'Stanley Kubrick');
+    expect(res.getBody()).to.have.property('title', 'The Cooler')
+    expect(res.getBody()).to.deep.include({title: 'The Cooler'})
+    expect(res.getBody()).to.have.deep.nested.property('director', 'Wayne Kramer');
   })
   
   test("Respecte le contrat d'interface attendu avec ajv", function() {
