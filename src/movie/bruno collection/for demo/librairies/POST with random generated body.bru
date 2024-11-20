@@ -13,5 +13,5 @@ post {
 script:pre-request {
   const { generateRandomMovieToPost } = require("./lib/generate")
   
-  req.setBody(generateRandomMovieToPost({ awards: 'my custom awards' }));
+  req.setBody(generateRandomMovieToPost({ title: 'Devfest casino 2024' }));
 }

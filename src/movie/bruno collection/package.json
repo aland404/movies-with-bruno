@@ -5,12 +5,12 @@
     "@ngneat/falso": "^7.2.0"
   },
   "devDependencies": {
-    "@usebruno/cli": "^1.16.0"
+    "@usebruno/cli": "^1.34.1"
   },
   "scripts": {
-    "run": "bru run . -r",
-    "run:local": "bru run . -r --env localhost",
-    "run:collect": "bru run . -r --env localhost --output run-collect-results.json"
+    "run:local": "bru run . -r --env localhost --env-var username=john --env-var password=changeme",
+    "run:local:tests-only": "bru run . -r --env localhost --env-var username=john --env-var password=changeme --tests-only",
+    "run:collect": "bru run . -r --env localhost --env-var username=john --env-var password=changeme --output run-collect-results.json"
   },
   "license": "MIT"
 }

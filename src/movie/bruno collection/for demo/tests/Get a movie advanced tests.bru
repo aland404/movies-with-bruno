@@ -20,11 +20,11 @@ tests {
   const Ajv = require("ajv")
   const ajv = new Ajv()
   
-  test('Vérification du statut http', function(){
+  test('Le statut http attendu est 200', function(){
     expect(res.getStatus(), 200)
   })
   
-  test("Response time is less than 200ms", function () {
+  test("Répond en moins de 200ms", function () {
       expect(res.getResponseTime()).to.be.below(200);
   })
   
@@ -33,13 +33,11 @@ tests {
     expect(res.getBody()).to.have.property('slug')
     expect(res.getBody()).to.have.property('slug', 'the-shining')
     expect(res.getBody()).to.deep.include({title: 'The Shining'})
-  expect(res.getBody()).to.have.deep.nested
-    .property('awards');
-  expect(res.getBody()).to.have.deep.nested
-    .property('actors', 'Jack Nicholson, Shelley Duvall, Danny Lloyd');
+    expect(res.getBody()).to.have.deep.nested.property('awards');
+    expect(res.getBody()).to.have.deep.nested.property('actors', 'Jack Nicholson, Shelley Duvall, Danny Lloyd');
   })
   
-  test("Valide le schéma json attendu", function() {
+  test("Respecte le contrat d'interface attendu avec ajv", function() {
     const movieSchema = {
       type: "object",
       properties: {

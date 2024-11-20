@@ -11,12 +11,12 @@ get {
 }
 
 tests {
-  test("should be able to get movies", function() {
+  test("Le statut http attendu est 200", function() {
     expect(res.getStatus()).to.equal(200);
   });
   
-  test("should receive a list of movies", function() {
-    const data = res.getBody();
-    expect(data).to.be.an('array');
+  test("Récupère une liste de films", function() {
+    const body = res.getBody();
+    expect(body).to.be.an('array');
   });
 }

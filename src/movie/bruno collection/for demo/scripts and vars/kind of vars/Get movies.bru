@@ -21,9 +21,11 @@ vars:post-response {
 script:post-response {
   var textCss = 'background: darkgrey; color: white; border-radius: 3px;';
   
-  console.log(`%c Variable de collection : %c ${bru.getCollectionVar('test')}`, textCss, 'color: blue;');
+  console.log(`%c Variable d'environnement global : %c ${bru.getGlobalEnvVar('test')}`, textCss, 'color: blue;');
   
-  console.log(`%c Variable d'environnement : %c ${bru.getEnvVar('test')}`, textCss, 'color: green;')
+  console.log(`%c Variable d'environnement : %c ${bru.getEnvVar('test')}`, textCss, 'color: green;');
+  
+  console.log(`%c Variable de collection : %c ${bru.getCollectionVar('test')}`, textCss, 'color: blue;');
   
   console.log(`%c Variable de dossier : %c ${bru.getFolderVar('test')}`, textCss, 'color: red;')
   

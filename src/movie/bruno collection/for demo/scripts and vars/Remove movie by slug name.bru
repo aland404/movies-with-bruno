@@ -31,8 +31,8 @@ script:pre-request {
     const baseUrl = bru.getEnvVar("baseUrl");
     const axios = require("axios");
     const response = await axios.post(`${baseUrl}/auth/login`, {
-      username: "john",
-      password: "changeme"
+      username: bru.getEnvVar('username'),
+      password: bru.getEnvVar('password')
     });
   
     bru.setVar("deleteAccessToken", response.data.access_token);
